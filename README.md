@@ -26,7 +26,7 @@ For datainconsistent please fix it first in the German [Wikipedia](https://de.wi
 - start with **python main.py**
 
 ## known issues
-Some Substations are not in the Database for instance Knapsack. Feel free to add them to the Wikipedia
+Some Substations are not in the Database for instance Knapsack. Feel free to add them to the Wikipedia.
 Some locations are not that accurate.
 
 ## Requirements
