@@ -1,4 +1,3 @@
-#!/bin/sh
 from telegram.ext import Updater, CommandHandler, Filters, MessageHandler
 import time
 import localdb
