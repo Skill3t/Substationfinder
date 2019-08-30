@@ -1,5 +1,4 @@
 from telegram.ext import Updater, CommandHandler, Filters, MessageHandler
-import time
 import localdb
 import configparser
 import logging
@@ -57,14 +56,20 @@ def echo(bot, update):
             "Mehr als eine Station gefunden"
         )
         for station in Stations:
-            update.message.reply_text(
-                "Station: {} \nGooglelink:{} \nWazeLink:{}".format(str(station[0]), str(station[1]), str(station[2]))
-            )
+            if station is not None:
+                update.message.reply_text(
+                    "Station: {} \nGooglelink:{} \nWazeLink:{}".format(str(station[0]), str(station[1]), str(station[2]))
+                )
+            else:
+                logging.error('Mehr Stationen "%s" caused error "%s"', update)
     else:
         for station in Stations:
-            update.message.reply_text(
-                "Station: {} \nGooglelink:{} \nWazeLink:{}".format(str(station[0]), str(station[1]), str(station[2]))
-            )
+            if station is not None:
+                update.message.reply_text(
+                    "Station: {} \nGooglelink:{} \nWazeLink:{}".format(str(station[0]), str(station[1]), str(station[2]))
+                )
+            else:
+                logging.error('Einzelne Station "%s" caused error "%s"', update)
     mybots[update.message.chat_id] = bot
 
 
@@ -94,18 +99,6 @@ def main():
     # Run the bot until you press Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT. This should be used most of the time, since
     # start_polling() is non-blocking and will stop the bot gracefully.
-
-    i = 1
-    while True:
-
-        time.sleep(60)
-
-        continue
-
-        # kein beep
-        for id, bot in mybots.items():
-            i += 1
-            bot.send_message(id, text="Beep! " + str(i))
 
     updater.idle()
 

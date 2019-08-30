@@ -19,11 +19,14 @@ def getLinkbyname(name):
         querry = 'select name, google_link, waze_link from Substations where name like ?'
         cur.execute(querry, ['%'+str(name)+'%'])
         rows = cur.fetchall()
-        results = []
-        for element in rows:
-            entity = [element[0], str(element[1]).replace(" ", ""), element[2]]
-            results.append(entity)
-        return results
+        if rows is not None:
+            results = []
+            for element in rows:
+                entity = [element[0], str(element[1]).replace(" ", ""), element[2]]
+                results.append(entity)
+            return results
+        else:
+            logging.error("Oops! empty row  {}".format(name))
     except lite.Error:
         logging.error("Oops!", sys.exc_info()[0], "occured.")
     finally:
